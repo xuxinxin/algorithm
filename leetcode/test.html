@@ -5,16 +5,25 @@
 </head>
 <body>
 <script type="text/javascript">
-var reverse = function(x) {
-    if(x<0){
-        return reverse(-x) === 0 ? 0 : -reverse(-x);
+var myAtoi = function(str) {
+    if(/[\d]/.test(str)){
+    	str = str.replace(/\s+/g,'') || str;
+    	var num = parseInt(str);
+    	if(num>2147483647)
+    		return 2147483647;
+    	if(num<-2147483648)
+    		return -2147483648;
+    	if(isNaN(num)){
+    		return str;
+    	}
+    	return num;
+    }else{
+    	return 0;
     }
-    var y = +x.toString().split('').reverse().join('');
-    return y > Math.pow(2,31) ? 0: y;
 };
 
 	s = 'abcd';
-	console.log(reverse(100));
+	console.log(myAtoi(' \n   '));
 </script>
 </body>
 </html>
