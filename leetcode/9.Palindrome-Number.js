@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
 var isPalindrome = function(x) {
     var i  = 1,
         xx = x;
@@ -23,9 +20,3 @@ var isPalindrome = function(x) {
     }
     return true;
 };
-
-	s = 'abcd';
-	console.log(isPalindrome(1200321));
-</script>
-</body>
-</html>
