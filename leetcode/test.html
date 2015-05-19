@@ -5,27 +5,56 @@
 </head>
 <body>
 <script type="text/javascript">
-var isPalindrome = function(x) {
-    var i  = 1,
-        xx = x;
-    if (x<0) return false;
-    while(x>=10){
-        i *= 10;
-        x /= 10;
+/* dp[i][j] 表示s[0...i-1]和p[0...j-1]匹配
+// j=0表示p为空，i=0表示s为空
+
+// 和数学归纳法一样要使用递推的方式得到结果
+// dp[i][j]计算的值要如下判断
+ * if p[j-1] !== '*'  ; dp[i][j] = dp[i-1][j-1] && (s[i-1] === p[j-1] || p[j-1] === '.')
+ * else p[j-1] === '*';
+ *    1.p[j-2]*匹配0次 dp[i][j] = dp[i][j-2]
+ *    2.p[j-2]*匹配到了 dp[i][j] = (s[i-1] === p[j-2] || p[j-2] === '.')&& dp[i-1][j]
+ *
+ *
+ */
+var isMatch = function(s, p) {
+    var dp = [];
+        dp[0] =[];
+    dp[0][0] = true;
+    for( var i=1; i<=s.length; i++ ){
+        dp[i] = [];
+        dp[i][0] = false;
     }
-    while(i>=10){
-        if ( (xx/i >>0) === xx%10 ){
-            xx = (xx%i)/10 >> 0;
-            i /= 100;
-        }else{
-            return false;
+    for( var j=1; j<=p.length; j++ ){
+        dp[0][j] = j>1 && p[j-1] === '*' && dp[0][j-2];
+    }
+    for( i=1; i<=s.length; i++ ){
+        for( j=1; j<=p.length; j++){
+            if(p[j-1] !== '*'){
+                dp[i][j] = dp[i-1][j-1] && (s[i-1] === p[j-1] || p[j-1] === '.');
+            }
+            else{
+                dp[i][j] = dp[i][j-2] || (s[i-1] === p[j-2] || p[j-2] === '.')&& dp[i-1][j];
+            }
         }
     }
-    return true;
-};
+    return dp[s.length][p.length];
+}
 
-	s = 'abcd';
-	console.log(isPalindrome(1200321));
+    console.log(isMatch('ab', '.*c'));
+    console.log(isMatch('', '.'));
+	console.log(isMatch('aa', 'a'));
+    console.log(isMatch('aaa', 'aa'));
+    console.log(isMatch('aa', 'aa'));
+    console.log(isMatch('aa', 'a*'));
+    console.log(isMatch('ab', '.*'));
+    console.log(isMatch('aa', '.*'));
+    console.log(isMatch('aab', 'c*a*b'));
+    console.log(isMatch('abbbc', 'ab*c'));
+    console.log(isMatch('ac', 'ab*c'));
+    console.log(isMatch('abbbc', 'ab*bbbc'));
+    console.log(isMatch('abcbcd', 'a.*c.*d'));
+
 </script>
 </body>
 </html>
