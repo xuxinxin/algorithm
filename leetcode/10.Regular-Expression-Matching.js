@@ -28,7 +28,7 @@ var isMatch = function(s, p) {
 */
 /**最投机取巧的办法
 var isMatch = function(s, p) {
-    var pattern = new RegExp('^'+p.replace(/\./g, '[\\w]')+'$');
+    var pattern = new RegExp('^'+p+'$');
     return pattern.test(s);
 }
 */
