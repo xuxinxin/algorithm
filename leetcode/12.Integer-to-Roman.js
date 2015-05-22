@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-/* dp[i][j] 表示s[0...i-1]和p[0...j-1]匹配
-// j=0表示p为空，i=0表示s为空
-
-// 和数学归纳法一样要使用递推的方式得到结果
-// dp[i][j]计算的值要如下判断
- * if p[j-1] !== '*'  ; dp[i][j] = dp[i-1][j-1] && (s[i-1] === p[j-1] || p[j-1] === '.')
- * else p[j-1] === '*';
- *    1.p[j-2]*匹配0次 dp[i][j] = dp[i][j-2]
- *    2.p[j-2]*匹配到了 dp[i][j] = (s[i-1] === p[j-2] || p[j-2] === '.')&& dp[i-1][j]
- *
- * 56250000
+/**
+ * @param {number} num
+ * @return {string}
  */
+ // 复杂的方式
 var intToRoman = function(num) {
     var outArray = [];
     if(num/1000>=1){
@@ -81,30 +67,3 @@ var intToRoman = function(num) {
     }
     return outArray.join('');
 };
-var pre = Date.now();
-console.log(intToRoman(3));
-console.log(intToRoman(4));
-console.log(intToRoman(8));
-console.log(intToRoman(9));
-console.log(intToRoman(10));
-console.log(intToRoman(15));
-console.log(intToRoman(12));
-console.log(intToRoman(19));
-console.log(intToRoman(20));
-console.log(intToRoman(21));
-console.log(intToRoman(51));
-console.log(intToRoman(60));
-console.log(intToRoman(80));
-
-console.log(intToRoman(90));
-console.log(intToRoman(99));
-console.log(intToRoman(100));
-console.log(intToRoman(1888));
-console.log(intToRoman(2015));
-console.log(intToRoman(3999));
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
