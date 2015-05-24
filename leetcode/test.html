@@ -6,40 +6,50 @@
 <body>
 <script type="text/javascript">
 
-var intToRoman = function(num) {
-    var roma  = ['M', 'CM', 'D', 'CD', 'C', 'XC','L','XL','X','IX','V','IV','I'],
-        value = [1000, 900, 500,  400, 100,   90, 50,  40, 10,   9,  5,   4, 1];
-    var outArray = [];
-    for (var i = 0; i < roma.length; i++) {
-        var count = count2 = num/value[i] >> 0;
-        while(count2--){
-            outArray.push(roma[i]);
+var romanToInt = function(s) {
+    var num = 0,
+        Roman ={
+            I: 1,
+            V: 5,
+            X: 10,
+            L: 50,
+            C: 100,
+            D: 500,
+            M: 1000
+        };
+    sArray = s.split('');
+    for (var i = 0; i < sArray.length; i++) {
+        if( sArray[i+1] && Roman[sArray[i+1]]>Roman[sArray[i]]){
+            num = num +Roman[sArray[i+1]] - Roman[sArray[i]];
+            i++;
+        }else{
+            num = num + Roman[sArray[i]];
         }
-        num = num - count*value[i];
     };
-    return outArray.join('');
+    return num;
+
 };
 var pre = Date.now();
-console.log(intToRoman(3));
-console.log(intToRoman(4));
-console.log(intToRoman(8));
-console.log(intToRoman(9));
-console.log(intToRoman(10));
-console.log(intToRoman(15));
-console.log(intToRoman(12));
-console.log(intToRoman(19));
-console.log(intToRoman(20));
-console.log(intToRoman(21));
-console.log(intToRoman(51));
-console.log(intToRoman(60));
-console.log(intToRoman(80));
+console.log(romanToInt('III'));  //3
+console.log(romanToInt('IV')); // 4 8 9 10 15 12 19 20 21 51 60 80 90 99 100
+console.log(romanToInt('VIII')); // 1888 2015 3999
+console.log(romanToInt('IX'));
+console.log(romanToInt('X'));
+console.log(romanToInt('XV'));
+console.log(romanToInt('XII'));
+console.log(romanToInt('XIX'));
+console.log(romanToInt('XX'));
+console.log(romanToInt('XXI'));
+console.log(romanToInt('LI'));
+console.log(romanToInt('LX'));
+console.log(romanToInt('LXXX'));
 
-console.log(intToRoman(90));
-console.log(intToRoman(99));
-console.log(intToRoman(100));
-console.log(intToRoman(1888));
-console.log(intToRoman(2015));
-console.log(intToRoman(3999));
+console.log(romanToInt('XC'));
+console.log(romanToInt('XCIX'));
+console.log(romanToInt('C'));
+console.log(romanToInt('MDCCCLXXXVIII'));
+console.log(romanToInt('MMXV'));
+console.log(romanToInt('MMMCMXCIX'));
 
 var end = Date.now();
 console.log(end - pre);
