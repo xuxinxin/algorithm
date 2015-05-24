@@ -5,80 +5,18 @@
 </head>
 <body>
 <script type="text/javascript">
-/* dp[i][j] 表示s[0...i-1]和p[0...j-1]匹配
-// j=0表示p为空，i=0表示s为空
 
-// 和数学归纳法一样要使用递推的方式得到结果
-// dp[i][j]计算的值要如下判断
- * if p[j-1] !== '*'  ; dp[i][j] = dp[i-1][j-1] && (s[i-1] === p[j-1] || p[j-1] === '.')
- * else p[j-1] === '*';
- *    1.p[j-2]*匹配0次 dp[i][j] = dp[i][j-2]
- *    2.p[j-2]*匹配到了 dp[i][j] = (s[i-1] === p[j-2] || p[j-2] === '.')&& dp[i-1][j]
- *
- * 56250000
- */
 var intToRoman = function(num) {
+    var roma  = ['M', 'CM', 'D', 'CD', 'C', 'XC','L','XL','X','IX','V','IV','I'],
+        value = [1000, 900, 500,  400, 100,   90, 50,  40, 10,   9,  5,   4, 1];
     var outArray = [];
-    if(num/1000>=1){
-        var m = ((num/1000)>>0);
-        for(var i = 0; i<m ; i++){
-            outArray.push('M');
+    for (var i = 0; i < roma.length; i++) {
+        var count = count2 = num/value[i] >> 0;
+        while(count2--){
+            outArray.push(roma[i]);
         }
-        num = num-m*1000;
-    }
-    if(num >= 900){
-        outArray.push('CM');
-        num = num-900;
-    }
-    if(num >= 500){
-        outArray.push('D');
-        num = num-500;
-    }
-    if(num >=400){
-        outArray.push('CD');
-        num = num-400;
-    }
-    if(num >= 100){
-        var c = (num/100)>>0;
-        for(i=0; i<c; i++){
-            outArray.push('C');
-        }
-        num = num-c*100;
-    }
-    if(num >= 90){
-        outArray.push('XC');
-        num = num-90;
-    }
-    if(num >= 50){
-        outArray.push('L');
-        num = num-50;
-    }
-    if(num >= 40){
-        outArray.push('XL');
-        num = num-40;
-    }
-    if(num >= 10){
-        var x = (num/10)>>0;
-        for(i=0;i<x;i++){
-            outArray.push("X");
-        }
-        num = num - x*10;
-    }
-    if(num === 9){
-         outArray.push("IX");
-          num = num - 9;
-    }
-    if(num>=5){
-        outArray.push('V');
-        num = num-5;
-    }
-    if(num === 4){
-         outArray.push("IV");
-          num = num - 4;
-    }
-    for(i=0;i<num;i++){
-        outArray.push('I');
-    }
+        num = num - count*value[i];
+    };
     return outArray.join('');
 };
 var pre = Date.now();

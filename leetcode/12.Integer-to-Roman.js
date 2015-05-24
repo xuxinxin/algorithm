@@ -3,6 +3,7 @@
  * @return {string}
  */
  // 复杂的方式
+ /*
 var intToRoman = function(num) {
     var outArray = [];
     if(num/1000>=1){
@@ -65,5 +66,21 @@ var intToRoman = function(num) {
     for(i=0;i<num;i++){
         outArray.push('I');
     }
+    return outArray.join('');
+};
+*/
+// 更加优雅高效的方式
+var intToRoman = function(num) {
+    var roma  = ['M', 'CM', 'D', 'CD', 'C', 'XC','L','XL','X','IX','V','IV','I'],
+        value = [1000, 900, 500,  400, 100,   90, 50,  40, 10,   9,  5,   4, 1];
+    var outArray = [];
+    for (var i = 0; i < roma.length; i++) {
+    	// count2 是全局变量，为了方便才这么写
+        var count = count2 = num/value[i] >> 0;
+        while(count2--){
+            outArray.push(roma[i]);
+        }
+        num = num - count*value[i];
+    };
     return outArray.join('');
 };
