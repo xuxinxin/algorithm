@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
 var longestCommonPrefix = function(strs) {
     if(strs.length === 0){
         return "";
     }else if(strs.length === 1){
         return strs[0];
     }else if(strs.length ===2){
-        for(var i = 0; strs[0][i] && strs[0][i]===strs[1][i]; i++){}
-        return strs[0].slice(0,i);
+        var shortstr = strs[0].length > strs[1].length ? strs[1] : strs[0],
+            longstr  = strs[0].length > strs[1].length ? strs[0] : strs[1];
+        for(var i = 0; i<shortstr.length && longstr[i]===shortstr[i]; i++){}
+        return shortstr.slice(0,i);
     }else{
         var half = (strs.length/2)>>0;
         var halfstrs = [];
@@ -22,12 +20,3 @@ var longestCommonPrefix = function(strs) {
         return longestCommonPrefix(halfstrs);
     }
 };
-var pre = Date.now();
-strs =['ab','ab','abv', 'abs'];
-console.log(longestCommonPrefix(strs));  //a
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
