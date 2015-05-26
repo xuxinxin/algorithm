@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
 var threeSum = function(nums) {
     // hash nums
     var hash=[],num2d=[];
@@ -27,14 +23,15 @@ var threeSum = function(nums) {
             if(nums[i]===nums[j]){
                 j--;
             }
-            if(hash[-(nums[i]+nums[j])]){
-                if(nums[j]*2+nums[i] === 0){
-                    if(hash[-(nums[i]+nums[j])]>1){
+            var target = -(nums[i]+nums[j]);
+            if(hash[target]){
+                if(nums[j] === target){
+                    if(hash[target]>1){
                         var triplet = [nums[i],nums[j],nums[j]];
                         num2d.push(triplet);
                     }
-                }else if(-(nums[i]+nums[j]) > nums[j]){
-                    triplet = [nums[i],nums[j],-(nums[i]+nums[j])];
+                }else if(target > nums[j]){
+                    triplet = [nums[i],nums[j],target];
                     num2d.push(triplet);
                 }
             }
@@ -45,13 +42,3 @@ var threeSum = function(nums) {
     }
     return num2d;
 };
-
-var pre = Date.now();
-strs =['ab','ab','abv', 'abs'];
-console.log(threeSum([1,0,-1,-1,2,-4,0,1,-3,5,-1]));  //a
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
