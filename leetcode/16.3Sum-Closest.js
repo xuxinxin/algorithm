@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
 var threeSumClosest = function(nums, target) {
     var minDiff = Infinity;
     nums.sort(function(v1,v2){
@@ -29,13 +26,3 @@ var threeSumClosest = function(nums, target) {
     };
     return target+minDiff;
 };
-
-var pre = Date.now();
-strs =['ab','ab','abv', 'abs'];
-console.log(threeSumClosest([-1,2,1,-4,5,7,9,1], 19));  //a
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
