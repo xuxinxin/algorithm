@@ -6,33 +6,28 @@
 <body>
 <script type="text/javascript">
 
-var threeSumClosest = function(nums, target) {
-    var minDiff = Infinity;
-    nums.sort(function(v1,v2){
-        return v1-v2;
-    })
-    for (var i = 0; i < nums.length; i++) {
-        var newTarget =target - nums[i];
-        var front = i+1,
-            back  = nums.length - 1;
-        while(front < back){
-            var diff = nums[front]+nums[back] -newTarget;
-            if(Math.abs(diff)<Math.abs(minDiff)){
-                minDiff = diff;
+var letterCombinations = function(digits) {
+    var letters = ["0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"],outArray = [''];
+    if(!digits){
+        return [];
+    }
+    for(var i = 0; i<digits.length; i++){
+
+        var tempArray = [],
+            digit     = +digits[i];
+        for(var k = 0; k<outArray.length;k++) {
+            for (var j = 0; j < letters[digit].length; j++) {
+                tempArray.push(''+outArray[k]+letters[digit][j]);
             }
-            if(nums[front]+nums[back] < newTarget){
-                front++;
-            }else{
-                back--;
-            }
-        }
-    };
-    return target+minDiff;
+        };
+        outArray = tempArray;
+    }
+    return outArray;
 };
 
 var pre = Date.now();
 strs =['ab','ab','abv', 'abs'];
-console.log(threeSumClosest([-1,2,1,-4,5,7,9,1], 19));  //a
+console.log(letterCombinations(''));
 
 var end = Date.now();
 console.log(end - pre);
