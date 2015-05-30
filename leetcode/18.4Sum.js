@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[][]}
+ */
 var fourSum = function(nums, target) {
     var hash   = [],
         result = [];
@@ -43,13 +40,3 @@ var fourSum = function(nums, target) {
     };
     return result;
 };
-
-var pre = Date.now();
-nums =[1, 0, 0, 2];
-console.log(fourSum(nums,1));
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
