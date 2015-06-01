@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-
-function ListNode(val) {
-     this.val = val;
-     this.next = null;
-}
-
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
 var isValid = function(s) {
     var stack = [];
     for(var i = 0 ; i<s.length ; i++ ){
@@ -36,14 +27,3 @@ var isValid = function(s) {
     }
     return stack.length === 0;
 };
-
-
-var pre = Date.now();
-nums =[1, 0, 0, 2];
-console.log(isValid("()"));
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
