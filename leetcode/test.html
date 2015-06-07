@@ -6,41 +6,27 @@
 <body>
 <script type="text/javascript">
 
-function ListNode(val) {
-     this.val = val;
-     this.next = null;
-}
-
-var isValid = function(s) {
-    var stack = [];
-    for(var i = 0 ; i<s.length ; i++ ){
-        if(s[i]==='(' || s[i]==='{' || s[i]==='['){
-            stack.push(s[i]);
-        }else{
-            var flag;
-            switch(s[i]){
-                case ')':
-                    flag = stack.pop()==='(';
-                    break;
-                case '}':
-                    flag = stack.pop()==='{';
-                    break;
-                case ']':
-                    flag = stack.pop()==='[';
-                    break;
-            }
-            if(flag === false){
-                return false;
-            }
+var generateParenthesis = function(n) {
+    var res =[];
+    addParenthesis("", n, 0);
+    return res;
+    function addParenthesis(str, left, right){
+        if(left === 0 && right === 0){
+            res.push(str);
+        }
+        if(left>0){
+            addParenthesis(str+'(', left-1, right+1);
+        }
+        if(right>0){
+            addParenthesis(str+')', left, right-1);
         }
     }
-    return stack.length === 0;
 };
 
 
 var pre = Date.now();
 nums =[1, 0, 0, 2];
-console.log(isValid("()"));
+console.log(generateParenthesis(4));
 
 var end = Date.now();
 console.log(end - pre);
