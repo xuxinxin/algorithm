@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>test</title>
-</head>
-<body>
-<script type="text/javascript">
-
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
 var mergeKLists = function(lists) {
 	if(lists.length === 0) return [];
     while(lists.length > 1){
@@ -46,17 +49,3 @@ var mergeTwoLists = function(l1, l2) {
     	}
     }
 };
-
- function ListNode(val) {
-      this.val = val;
-      this.next = null;
-  }
-var pre = Date.now();
-nums =[1, 0, 0, 2];
-console.log(mergeKLists([[],[]]));
-
-var end = Date.now();
-console.log(end - pre);
-</script>
-</body>
-</html>
