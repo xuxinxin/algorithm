@@ -5,55 +5,42 @@
 </head>
 <body>
 <script type="text/javascript">
+var INT_MIN = -2147483648;
+var INT_MAX = 2147483647;
+var divide = function(dividend, divisor) {
+		if(divisor == 1)
+				return dividend;
+		if(dividend == INT_MIN && Math.abs(divisor) == 1)
+				return INT_MAX;
 
-var mergeKLists = function(lists) {
-	if(lists.length === 0) return [];
-    while(lists.length > 1){
-		var newLists = [];
-		if(lists.length % 2 === 1){
-			lists.push(null);
-		}
-		for(var i =0; i<lists.length; i=i+2){
-			newLists.push(mergeTwoLists(lists[i], lists[i+1]));
-		}
-		lists = newLists;
-	}
-	return lists[0];
-};
-
-var mergeTwoLists = function(l1, l2) {
-    if(l1 === null ) return l2;
-    if(l2 === null ) return l1;
-    var head = l1.val<l2.val?l1:l2;
-    var p = new ListNode();
-    while(l1 || l2){
-    	if(l1 && l2){
-    		if(l1.val<l2.val){
-    			p.next = l1;
-    			p = p.next;
-    			l1 = l1.next;
-    		}else{
-    			p.next = l2;
-    			p = p.next;
-    			l2 = l2.next;
-    		}
-    	}else if(l1 === null){
-    		p.next = l2;
-    		return head;
-    	}else{
-    		p.next = l1;
-    		return head;
-    	}
+    if(divisor===0){
+      return INT_MAX;
     }
-};
+    if( ( dividend<0 && divisor>0 ) || ( dividend>0 && divisor<0 )){
+      return -divide(Math.abs(dividend), Math.abs(divisor));
+    }
+    dividend = Math.abs(dividend);
+    divisor  = Math.abs(divisor);
+    var result = 0,
+        divisorKeep = divisor;
 
- function ListNode(val) {
-      this.val = val;
-      this.next = null;
-  }
+    while(dividend >= divisorKeep){
+      var v = 1;
+      while(dividend>= (divisor<<1)  ){
+				if(divisor<<1 <=0){
+						break;
+				}
+				v = v<<1;
+        divisor = divisor<<1;
+      }
+      result+=v;
+      dividend -=divisor;
+      divisor = divisorKeep;
+    }
+    return result;
+}
 var pre = Date.now();
-nums =[1, 0, 0, 2];
-console.log(mergeKLists([[],[]]));
+console.log(divide(-2147483648, -2147483648));
 
 var end = Date.now();
 console.log(end - pre);
